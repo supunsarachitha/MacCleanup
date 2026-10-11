@@ -23,6 +23,14 @@ xcodebuild -project MacCleanup.xcodeproj -scheme MacCleanup -destination 'platfo
 
 The app is built ad hoc signed (`CODE_SIGN_IDENTITY = -`), which is enough to run it on the Mac that built it. To distribute it, set your own team and signing identity in the target's **Signing & Capabilities** tab and notarize it.
 
+**Build a drag-to-Applications installer**
+
+```sh
+./scripts/build-installer.sh
+```
+
+This builds the Release app and writes `build/installer/Mac-Cleanup-Assistant.dmg`. The current ad-hoc signature is for local use; public distribution requires signing with your Developer ID and notarizing the app.
+
 ## The workflow
 
 ```

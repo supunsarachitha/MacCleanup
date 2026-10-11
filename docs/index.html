@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#173f36">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0f3d33">
     <meta name="description" content="A native macOS cleanup utility. Scan, review every category, and confirm before anything is removed. Open source SwiftUI, no dependencies, no network access.">
     <title>Mac Cleanup Assistant</title>
     <link rel="canonical" href="https://supunsarachitha.github.io/MacCleanup/">
@@ -22,181 +23,251 @@
     <meta name="twitter:description" content="Scan, review every category, and confirm before anything is removed.">
     <meta name="twitter:image" content="https://supunsarachitha.github.io/MacCleanup/assets/mac-cleanup-icon-512.png">
 
+    <script>document.documentElement.classList.add("js");</script>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="Mac Cleanup Assistant home">
-        <img src="assets/mac-cleanup-icon-128.png" alt="" width="38" height="38">
-        <span>Mac Cleanup Assistant</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#workflow">Workflow</a>
-        <a href="#safety">Safety</a>
-        <a href="#download">Download</a>
-      </nav>
-      <a class="source-link" href="https://github.com/supunsarachitha/MacCleanup">
-        GitHub <span aria-hidden="true">↗</span>
-      </a>
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Mac Cleanup Assistant home">
+          <img src="assets/mac-cleanup-icon-128.png" alt="" width="32" height="32">
+          <span>Mac Cleanup Assistant</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#how">How it works</a>
+          <a href="#tour">The app</a>
+          <a href="#cleans">What it cleans</a>
+          <a href="#safety">Safety</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-ghost" href="https://github.com/supunsarachitha/MacCleanup">GitHub</a>
+          <a class="btn btn-primary btn-sm" href="#download">Download</a>
+        </div>
+      </div>
     </header>
 
     <main id="main">
+      <!-- Hero -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-inner">
+        <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="status-dot"></span> Open source · macOS 14 and newer</p>
-            <h1 id="hero-title">Free up space,<br><span>safely.</span></h1>
-            <p class="hero-summary">Mac Cleanup Assistant finds caches, logs and build leftovers, shows you exactly what it found, and removes only what you approve.</p>
-            <div class="hero-actions">
-              <a class="primary-link" href="https://github.com/supunsarachitha/MacCleanup/releases/latest">Download for macOS <span aria-hidden="true">↓</span></a>
-              <a class="text-link" href="#workflow">See how it works <span aria-hidden="true">→</span></a>
+            <p class="pill"><span class="pill-dot" aria-hidden="true"></span>Version 1.0 · macOS 14 and newer · Open source</p>
+            <h1 id="hero-title">Free up space on your Mac. <span>Safely.</span></h1>
+            <p class="lead">Mac Cleanup Assistant finds caches, logs and build leftovers, shows you exactly what it found, and removes only what you approve.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://github.com/supunsarachitha/MacCleanup/releases/latest">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>
+                Download for macOS
+              </a>
+              <a class="btn btn-secondary" href="https://github.com/supunsarachitha/MacCleanup">View on GitHub</a>
             </div>
-            <p class="hero-meta">Free · DMG installer · Version 1.0</p>
+            <p class="fine">Free and open source (MIT) · DMG installer · macOS 14 or later</p>
           </div>
-          <div class="hero-art">
-            <img src="assets/mac-cleanup-icon-512.png" alt="Mac Cleanup Assistant app icon: a storage checklist with cleanup sparkles" width="270" height="270">
-            <p>Scan <span>·</span> Review <span>·</span> Confirm</p>
-          </div>
-        </div>
-        <div class="hero-footer" aria-label="App details">
-          <span>Native SwiftUI app</span>
-          <span>No third-party dependencies</span>
-          <span>No network access</span>
-          <span>Scan is read-only</span>
-        </div>
-      </section>
-
-      <section class="workflow section-wrap" id="workflow" aria-labelledby="workflow-title">
-        <div class="section-heading">
-          <p class="eyebrow">The workflow</p>
-          <h2 id="workflow-title">You stay in the loop.</h2>
-          <p>A scan only reads. Cleanup begins after you have seen the results and approved the selection.</p>
-        </div>
-        <ol class="steps">
-          <li>
-            <span class="step-number">01</span>
-            <h3>Scan</h3>
-            <p>See the size and item count for each supported location. Scanning changes nothing.</p>
-          </li>
-          <li>
-            <span class="step-number">02</span>
-            <h3>Review</h3>
-            <p>Expand a category to inspect its location and a short preview of what was found.</p>
-          </li>
-          <li>
-            <span class="step-number">03</span>
-            <h3>Select</h3>
-            <p>Choose categories yourself. Personal files in Downloads and Xcode Archives start unchecked.</p>
-          </li>
-          <li>
-            <span class="step-number">04</span>
-            <h3>Confirm</h3>
-            <p>Check the totals in the confirmation dialog before any cleanup starts.</p>
-          </li>
-        </ol>
-      </section>
-
-      <section class="review section-wrap" aria-labelledby="review-title">
-        <div class="section-heading">
-          <p class="eyebrow">The app</p>
-          <h2 id="review-title">See everything before you clean.</h2>
-          <p>Each category shows its size and file count up front. Expand it to see where it lives, and choose exactly what goes. Your own files start unchecked.</p>
-        </div>
-        <figure class="shot shot-hero">
-          <img src="assets/screenshots/overview-results.png" alt="Mac Cleanup Assistant results screen listing User Cache, Logs, Xcode Derived Data, Docker and Downloads with sizes and checkboxes" width="1600" height="1140" loading="lazy">
-          <figcaption>Results of a scan. Downloads (your own files) starts unchecked.</figcaption>
-        </figure>
-        <div class="shot-grid">
-          <figure class="shot">
-            <img src="assets/screenshots/review-details.png" alt="Review Details screen with expandable categories" width="1600" height="1140" loading="lazy">
-            <figcaption>Review every category and its location.</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="assets/screenshots/safety.png" alt="Safety screen describing how cleanup works and what is never touched" width="1600" height="1140" loading="lazy">
-            <figcaption>The rules, in plain language, inside the app.</figcaption>
+          <figure class="hero-shot">
+            <img src="assets/screenshots/overview-results.png" alt="Mac Cleanup Assistant results screen listing User Cache, Logs, Xcode Derived Data, Docker and Downloads with sizes and checkboxes" width="1600" height="1140">
           </figure>
         </div>
       </section>
 
-      <section class="coverage" aria-labelledby="coverage-title">
-        <div class="section-wrap coverage-inner">
-          <div class="section-heading">
-            <p class="eyebrow">What it checks</p>
-            <h2 id="coverage-title">Useful targets.<br>Clear boundaries.</h2>
-            <p>Only direct children of the listed folders are considered. The folders themselves stay in place.</p>
+      <!-- Trust strip -->
+      <section class="trust" aria-label="Key guarantees">
+        <div class="container trust-grid">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div><strong>Read-only scan</strong><span>Looking changes nothing</span></div>
           </div>
-          <ul class="category-list">
-            <li><span>User caches and logs</span><span>Browser caches</span></li>
-            <li><span>Temporary files older than 3 days</span><span>Trash</span></li>
-            <li><span>Xcode Derived Data</span><span>Homebrew downloads</span></li>
-            <li><span>Xcode Archives</span><span>Older Downloads</span></li>
-            <li><span>Docker cleanup estimate</span><span>Volumes are never pruned</span></li>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8.3-8 9-4.8-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            <div><strong>You confirm first</strong><span>Nothing leaves until you press Delete</span></div>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>
+            <div><strong>No network access</strong><span>Everything stays on your Mac</span></div>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+            <div><strong>No dependencies</strong><span>Pure SwiftUI, native to macOS</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-title">You stay in the loop.</h2>
+            <p>A scan only reads. Cleanup begins after you have seen the results and approved the selection.</p>
+          </header>
+          <ol class="steps">
+            <li>
+              <span class="step-num">1</span>
+              <h3>Scan</h3>
+              <p>See the size and file count for each supported location.</p>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <h3>Review</h3>
+              <p>Expand a category to inspect where it lives and what was found.</p>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <h3>Select</h3>
+              <p>Choose categories yourself. Your own files start unchecked.</p>
+            </li>
+            <li>
+              <span class="step-num">4</span>
+              <h3>Confirm</h3>
+              <p>Check the totals in the dialog. Nothing is removed until you press Delete.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Product tour -->
+      <section class="section section-alt" id="tour" aria-labelledby="tour-title">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">The app</p>
+            <h2 id="tour-title">Everything visible before you clean.</h2>
+          </header>
+
+          <div class="tour" data-tour>
+            <div class="tour-tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
+              <button class="tour-tab" role="tab" id="tab-scan" aria-controls="panel-scan" aria-selected="true">
+                <strong>Scan</strong>
+                <span>One button. Read-only, and you pick how old Downloads must be.</span>
+              </button>
+              <button class="tour-tab" role="tab" id="tab-results" aria-controls="panel-results" aria-selected="false" tabindex="-1">
+                <strong>Results</strong>
+                <span>Every category with its size and file count, plus the total you would recover.</span>
+              </button>
+              <button class="tour-tab" role="tab" id="tab-review" aria-controls="panel-review" aria-selected="false" tabindex="-1">
+                <strong>Review</strong>
+                <span>Expand any category to see where it lives and a short preview of what is in it.</span>
+              </button>
+              <button class="tour-tab" role="tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1">
+                <strong>Safety</strong>
+                <span>The rules in plain language, right inside the app.</span>
+              </button>
+            </div>
+
+            <div class="tour-stage">
+              <figure class="tour-panel" role="tabpanel" id="panel-scan" aria-labelledby="tab-scan">
+                <img src="assets/screenshots/overview-idle.png" alt="Start screen with the Scan System button and the Downloads age setting" width="1600" height="1140" loading="lazy">
+              </figure>
+              <figure class="tour-panel" role="tabpanel" id="panel-results" aria-labelledby="tab-results">
+                <img src="assets/screenshots/overview-results.png" alt="Results screen listing each category with its size, file count and a checkbox" width="1600" height="1140" loading="lazy">
+              </figure>
+              <figure class="tour-panel" role="tabpanel" id="panel-review" aria-labelledby="tab-review">
+                <img src="assets/screenshots/review-details.png" alt="Review Details screen with expandable categories" width="1600" height="1140" loading="lazy">
+              </figure>
+              <figure class="tour-panel" role="tabpanel" id="panel-safety" aria-labelledby="tab-safety">
+                <img src="assets/screenshots/safety.png" alt="Safety screen describing how cleanup works and what is never touched" width="1600" height="1140" loading="lazy">
+              </figure>
+              <p class="tour-note">Screenshots show a scan of a developer Mac. Your sizes and categories will differ.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What it cleans -->
+      <section class="section" id="cleans" aria-labelledby="cleans-title">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">What it cleans</p>
+            <h2 id="cleans-title">Useful targets. Clear boundaries.</h2>
+            <p>Only the direct children of these folders are considered. The folders themselves stay in place.</p>
+          </header>
+          <ul class="cat-grid">
+            <li><strong>User Cache</strong><code>~/Library/Caches</code><span class="tag">Deleted</span></li>
+            <li><strong>Logs</strong><code>~/Library/Logs</code><span class="tag">Deleted</span></li>
+            <li><strong>Temporary Files</strong><code>/private/tmp · 3+ days old</code><span class="tag">Deleted</span></li>
+            <li><strong>Safari Cache</strong><code>~/Library/Caches/com.apple.Safari</code><span class="tag">Deleted</span></li>
+            <li><strong>Chrome Cache</strong><code>~/Library/Caches/Google/Chrome</code><span class="tag">Deleted</span></li>
+            <li><strong>Firefox Cache</strong><code>~/Library/Caches/Firefox</code><span class="tag">Deleted</span></li>
+            <li><strong>Trash</strong><code>~/.Trash</code><span class="tag">Deleted</span></li>
+            <li><strong>Xcode Derived Data</strong><code>~/Library/Developer/Xcode/DerivedData</code><span class="tag">Deleted</span></li>
+            <li><strong>Homebrew Downloads</strong><code>~/Library/Caches/Homebrew</code><span class="tag">Deleted</span></li>
+            <li><strong>Docker</strong><code>Containers, dangling images, build cache</code><span class="tag tag-docker">docker prune</span></li>
+            <li><strong>Xcode Archives</strong><code>~/Library/Developer/Xcode/Archives</code><span class="tag tag-trash">Moved to Trash</span></li>
+            <li><strong>Older Downloads</strong><code>~/Downloads · 30+ days by default</code><span class="tag tag-trash">Moved to Trash</span></li>
           </ul>
         </div>
       </section>
 
-      <section class="safety section-wrap" id="safety" aria-labelledby="safety-title">
-        <div class="safety-mark" aria-hidden="true">!</div>
-        <div class="safety-copy">
-          <p class="eyebrow">Built around restraint</p>
-          <h2 id="safety-title">Personal files are out of bounds.</h2>
-          <p>The safety policy rejects protected folders, system locations, libraries, and anything that is not a direct child of an approved cleanup folder. It is checked at scan time and again right before each item is removed. Symlinks are not followed, and items changed after scanning are skipped.</p>
-          <p>Downloads and Xcode Archives that you choose to clean are moved to the Trash. Other selected cache and temporary items are deleted. Docker volumes are never included.</p>
-        </div>
-        <div class="safety-note">
-          <strong>Permissions stay optional</strong>
-          <p>Full Disk Access is only needed for protected locations such as Trash and Safari cache. The rest of the scan remains available without it.</p>
+      <!-- Safety -->
+      <section class="section section-dark" id="safety" aria-labelledby="safety-title">
+        <div class="container safety-grid">
+          <div class="safety-intro">
+            <p class="eyebrow">Built around restraint</p>
+            <h2 id="safety-title">Personal files are out of bounds.</h2>
+            <p>A safety policy rejects protected folders, system locations and anything that is not a direct child of an approved cleanup folder. It runs at scan time and again right before every removal.</p>
+            <p class="safety-aside"><strong>Permissions stay optional.</strong> Full Disk Access is only needed for protected locations such as Trash and Safari cache. The rest of the scan works without it.</p>
+          </div>
+          <ul class="safety-list">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Scan is read-only</strong><span>It lists folders and reads file attributes, nothing more.</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Policy checked twice</strong><span>Desktop, Documents, Photos, iCloud Drive, Mail and system folders are refused.</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Symlinks never followed</strong><span>A link inside a cache can't lead cleanup into your documents.</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Changed items are skipped</strong><span>Anything modified since the scan is left alone.</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Your files go to the Trash</strong><span>Downloads and Xcode Archives can be restored.</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><strong>Docker volumes untouched</strong><span>Volumes are never pruned.</span></div></li>
+          </ul>
         </div>
       </section>
 
-      <section class="build-band" id="download" aria-labelledby="download-title">
-        <div class="section-wrap build-head">
-          <p class="eyebrow">Get it</p>
-          <h2 id="download-title">Install in a minute.</h2>
-          <p>Requires macOS 14 Sonoma or later. Free and open source, with no third-party dependencies.</p>
-        </div>
+      <!-- Download -->
+      <section class="section" id="download" aria-labelledby="download-title">
+        <div class="container">
+          <header class="section-head section-head-center">
+            <p class="eyebrow">Get it</p>
+            <h2 id="download-title">Install in a minute.</h2>
+            <p>Requires macOS 14 Sonoma or later. Free, open source, no third-party dependencies.</p>
+          </header>
 
-        <div class="section-wrap install-grid">
-          <div class="install-card">
-            <h3>Download the app</h3>
-            <ol>
-              <li>Download <strong>Mac-Cleanup-Assistant.dmg</strong> from the latest release.</li>
-              <li>Drag <strong>Mac Cleanup Assistant</strong> to Applications.</li>
-              <li>On first launch, right-click the app and choose <strong>Open</strong>.</li>
-            </ol>
-            <a class="primary-link" href="https://github.com/supunsarachitha/MacCleanup/releases/latest">Download the DMG <span aria-hidden="true">↓</span></a>
-            <p class="fine-print">The release is ad-hoc signed and not notarized, so macOS asks you to confirm the first launch. If it is blocked, use <em>System Settings → Privacy &amp; Security → Open Anyway</em>.</p>
-          </div>
-
-          <div class="install-card">
-            <h3>Or build from source</h3>
-            <p>Requires Xcode 16 or later.</p>
-            <div class="build-command">
-              <span>Build a drag-to-Applications DMG</span>
-              <code>./scripts/build-installer.sh</code>
-              <small>Output: <code>build/installer/Mac-Cleanup-Assistant.dmg</code></small>
+          <div class="install-grid">
+            <div class="card">
+              <h3>Download the app</h3>
+              <ol>
+                <li>Download <strong>Mac-Cleanup-Assistant.dmg</strong> from the latest release.</li>
+                <li>Drag <strong>Mac Cleanup Assistant</strong> to Applications.</li>
+                <li>On first launch, right-click the app and choose <strong>Open</strong>.</li>
+              </ol>
+              <a class="btn btn-primary" href="https://github.com/supunsarachitha/MacCleanup/releases/latest">Download the DMG</a>
+              <p class="fine">The release is ad-hoc signed and not notarized, so macOS asks you to confirm the first launch. If it is blocked, use <em>System Settings → Privacy &amp; Security → Open Anyway</em>.</p>
             </div>
-            <p class="fine-print">Prefer Xcode? Open <code>MacCleanup.xcodeproj</code>, select the MacCleanup scheme and press ⌘R.</p>
-          </div>
-        </div>
 
-        <div class="section-wrap build-links">
-          <a href="https://github.com/supunsarachitha/MacCleanup">Browse the source <span aria-hidden="true">↗</span></a>
-          <a href="https://github.com/supunsarachitha/MacCleanup/blob/main/README.md">Build, test and safety notes <span aria-hidden="true">↗</span></a>
-          <a href="https://github.com/supunsarachitha/MacCleanup/releases">All releases <span aria-hidden="true">↗</span></a>
+            <div class="card">
+              <h3>Or build from source</h3>
+              <p>Requires Xcode 16 or later.</p>
+              <pre class="code"><code>git clone https://github.com/supunsarachitha/MacCleanup.git
+cd MacCleanup
+./scripts/build-installer.sh</code></pre>
+              <p class="fine">Writes <code>build/installer/Mac-Cleanup-Assistant.dmg</code>. Prefer Xcode? Open <code>MacCleanup.xcodeproj</code>, choose the MacCleanup scheme and press ⌘R.</p>
+              <a class="btn btn-secondary" href="https://github.com/supunsarachitha/MacCleanup/blob/main/README.md">Build, test and safety notes</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <a class="brand" href="#top">
-        <img src="assets/mac-cleanup-icon-128.png" alt="" width="30" height="30">
-        <span>Mac Cleanup Assistant</span>
-      </a>
-      <p>Made for a tidier Mac, with you in control.</p>
-      <a href="https://github.com/supunsarachitha/MacCleanup/issues">Report an issue <span aria-hidden="true">↗</span></a>
+      <div class="container footer-inner">
+        <a class="brand" href="#top">
+          <img src="assets/mac-cleanup-icon-128.png" alt="" width="26" height="26">
+          <span>Mac Cleanup Assistant</span>
+        </a>
+        <nav aria-label="Footer">
+          <a href="https://github.com/supunsarachitha/MacCleanup">Source</a>
+          <a href="https://github.com/supunsarachitha/MacCleanup/releases">Releases</a>
+          <a href="https://github.com/supunsarachitha/MacCleanup/issues">Issues</a>
+          <a href="https://github.com/supunsarachitha/MacCleanup/blob/main/LICENSE">MIT License</a>
+        </nav>
+      </div>
     </footer>
+
+    <script src="script.js" defer></script>
   </body>
 </html>

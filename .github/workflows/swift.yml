@@ -13,65 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Detect Xcode project or workspace
-        id: xcode
-        shell: bash
-        run: |
-          set -e
-
-          if ls *.xcworkspace >/dev/null 2>&1; then
-            WORKSPACE=$(ls *.xcworkspace | head -n 1)
-            SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" 2>/dev/null | awk '/Schemes:/{getline; print; exit}')
-            echo "type=workspace" >> "$GITHUB_OUTPUT"
-            echo "path=$WORKSPACE" >> "$GITHUB_OUTPUT"
-            echo "scheme=$SCHEME" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          if ls *.xcodeproj >/dev/null 2>&1; then
-            PROJECT=$(ls *.xcodeproj | head -n 1)
-            SCHEME=$(xcodebuild -list -project "$PROJECT" 2>/dev/null | awk '/Schemes:/{getline; print; exit}')
-            echo "type=project" >> "$GITHUB_OUTPUT"
-            echo "path=$PROJECT" >> "$GITHUB_OUTPUT"
-            echo "scheme=$SCHEME" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "No Xcode project or workspace found in repository root."
-          exit 1
+      - name: Show Xcode version
+        run: xcodebuild -version
+        working-directory: ${{ github.workspace }}
 
       - name: Build app
-        shell: bash
         run: |
-          set -e
-          if [ "${{ steps.xcode.outputs.type }}" = "workspace" ]; then
-            xcodebuild \
-              -workspace "${{ steps.xcode.outputs.path }}" \
-              -scheme "${{ steps.xcode.outputs.scheme }}" \
-              -destination 'platform=macOS' \
-              build
-          else
-            xcodebuild \
-              -project "${{ steps.xcode.outputs.path }}" \
-              -scheme "${{ steps.xcode.outputs.scheme }}" \
-              -destination 'platform=macOS' \
-              build
-          fi
+          xcodebuild \
+            -project "$GITHUB_WORKSPACE/MacCleanup.xcodeproj" \
+            -scheme MacCleanup \
+            -destination 'platform=macOS' \
+            build
+        working-directory: ${{ github.workspace }}
 
       - name: Run tests
-        shell: bash
         run: |
-          set -e
-          if [ "${{ steps.xcode.outputs.type }}" = "workspace" ]; then
-            xcodebuild \
-              -workspace "${{ steps.xcode.outputs.path }}" \
-              -scheme "${{ steps.xcode.outputs.scheme }}" \
-              -destination 'platform=macOS' \
-              test
-          else
-            xcodebuild \
-              -project "${{ steps.xcode.outputs.path }}" \
-              -scheme "${{ steps.xcode.outputs.scheme }}" \
-              -destination 'platform=macOS' \
-              test
-          fi
+          xcodebuild \
+            -project "$GITHUB_WORKSPACE/MacCleanup.xcodeproj" \
+            -scheme MacCleanup \
+            -destination 'platform=macOS' \
+            test
+        working-directory: ${{ github.workspace }}

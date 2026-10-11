@@ -1,12 +1,50 @@
+<div align="center">
+
+<img src="docs/assets/mac-cleanup-icon-128.png" alt="Mac Cleanup Assistant icon" width="112" height="112">
+
 # Mac Cleanup Assistant
 
-[Project site](https://supunsarachitha.github.io/MacCleanup/) · SwiftUI · macOS 14 Sonoma or newer · No third-party dependencies · No network access
+**Find what's taking up space. Review every item. Nothing is removed until you confirm.**
 
-A native macOS utility for finding removable clutter, reviewing exactly what would be cleaned, and confirming before anything is removed.
+A native SwiftUI utility for macOS that scans well-known cleanup locations, shows exactly what it found, and cleans only what you approve.
 
-## Build and test
+[![Build](https://github.com/supunsarachitha/MacCleanup/actions/workflows/swift.yml/badge.svg)](https://github.com/supunsarachitha/MacCleanup/actions/workflows/swift.yml)
+[![Release](https://img.shields.io/github/v/release/supunsarachitha/MacCleanup?label=release)](https://github.com/supunsarachitha/MacCleanup/releases/latest)
+![Platform](https://img.shields.io/badge/macOS-14%2B-lightgrey?logo=apple&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-6-orange?logo=swift&logoColor=white)
+![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 
-Requirements: macOS 14+ and Xcode 16 or newer.
+[**Download**](https://github.com/supunsarachitha/MacCleanup/releases/latest) ·
+[Project site](https://supunsarachitha.github.io/MacCleanup/) ·
+[Report an issue](https://github.com/supunsarachitha/MacCleanup/issues)
+
+</div>
+
+---
+
+## Highlights
+
+- **Read-only scan.** Scanning lists folders and reads file attributes. It has no code path that changes anything.
+- **Review before you delete.** Every category shows its location, size, file count and a short preview.
+- **Explicit confirmation.** A dialog shows the exact size, category count and file count. Nothing happens until you press **Delete**.
+- **Safety policy, checked twice.** Protected folders and system locations are refused at scan time and again immediately before each removal.
+- **Your own files go to the Trash.** Downloads and Xcode Archives are moved to the Trash, so a mistake can be undone.
+- **Native and private.** Pure SwiftUI, no third-party dependencies, no network access.
+
+## Install
+
+### Download the app
+
+1. Download **Mac-Cleanup-Assistant.dmg** from the [latest release](https://github.com/supunsarachitha/MacCleanup/releases/latest).
+2. Open the DMG and drag **Mac Cleanup Assistant** to **Applications**.
+3. On first launch, right-click the app and choose **Open**.
+
+> [!NOTE]
+> The released build is ad-hoc signed and not notarized, so macOS Gatekeeper asks you to confirm the first launch. If the app is blocked, open **System Settings → Privacy & Security** and choose **Open Anyway**. If you'd rather not run an unnotarized binary, build it from source below.
+
+### Build from source
+
+Requirements: macOS 14 Sonoma or newer and Xcode 16 or newer.
 
 **In Xcode**
 
@@ -17,32 +55,32 @@ Requirements: macOS 14+ and Xcode 16 or newer.
 **From the terminal**
 
 ```sh
+# Build
 xcodebuild -project MacCleanup.xcodeproj -scheme MacCleanup -configuration Release build
+
+# Test
 xcodebuild -project MacCleanup.xcodeproj -scheme MacCleanup -destination 'platform=macOS' test
-```
 
-The app is built ad hoc signed (`CODE_SIGN_IDENTITY = -`), which is enough to run it on the Mac that built it. To distribute it, set your own team and signing identity in the target's **Signing & Capabilities** tab and notarize it.
-
-**Build a drag-to-Applications installer**
-
-```sh
+# Build a drag-to-Applications installer (writes build/installer/Mac-Cleanup-Assistant.dmg)
 ./scripts/build-installer.sh
 ```
 
-This builds the Release app and writes `build/installer/Mac-Cleanup-Assistant.dmg`. The current ad-hoc signature is for local use; public distribution requires signing with your Developer ID and notarizing the app.
+The project is ad-hoc signed (`CODE_SIGN_IDENTITY = -`), which is enough to run it on the Mac that built it. To distribute your own build, set your team and signing identity in **Signing & Capabilities** and notarize the app.
 
-## The workflow
+## How it works
 
 ```
-Scan → Review → Select → Confirm → Delete → Results
+Scan  →  Review  →  Select  →  Confirm  →  Clean  →  Results
 ```
 
-1. **Scan System** reads the cleanup locations and measures them. It has no code path that changes anything.
-2. The **summary** shows each category with its size and file count, and the total you'd recover.
-3. **Review Details** expands every category: location, size, file count and a short preview (never thousands of rows).
-4. Every category has a checkbox. Items that are your own files (Downloads, Xcode Archives) start unchecked.
-5. **Clean Selected** opens a confirmation dialog showing the size, category count and file count. Nothing is removed until **Delete** is pressed.
-6. Cleanup runs with live progress and a Stop button, then the **results** screen reports space recovered, files removed and time taken.
+| Step | What happens |
+|---|---|
+| **Scan** | **Scan System** (⌘R) reads the cleanup locations and measures them. Nothing is changed. |
+| **Review** | The summary lists each category with its size and file count, plus the total you'd recover. **Review Details** expands every category into its location and a short preview (never thousands of rows). |
+| **Select** | Every category has a checkbox. Items that are your own files (Downloads, Xcode Archives) start unchecked. |
+| **Confirm** | **Clean Selected** opens a dialog with the size, category count and file count. Nothing is removed until **Delete** is pressed. |
+| **Clean** | Cleanup runs with live progress and a **Stop** button. |
+| **Results** | The results screen reports space recovered, files removed and time taken. |
 
 ## Cleanup categories
 
@@ -50,7 +88,7 @@ Scan → Review → Select → Confirm → Delete → Results
 |---|---|---|
 | User Cache | `~/Library/Caches` (minus the browser and Homebrew folders below) | Deleted |
 | Logs | `~/Library/Logs` | Deleted |
-| Temporary Files | `/private/tmp`, `/private/var/tmp` — your own items untouched for 3+ days | Deleted |
+| Temporary Files | `/private/tmp`, `/private/var/tmp`: your own items untouched for 3+ days | Deleted |
 | Safari Cache | `~/Library/Caches/com.apple.Safari` | Deleted |
 | Chrome Cache | `~/Library/Caches/Google/Chrome` | Deleted |
 | Firefox Cache | `~/Library/Caches/Firefox/Profiles` | Deleted |
@@ -59,22 +97,22 @@ Scan → Review → Select → Confirm → Delete → Results
 | Xcode Archives | `~/Library/Developer/Xcode/Archives` | **Moved to Trash** |
 | Homebrew Downloads | `~/Library/Caches/Homebrew/downloads` and `/Cask` | Deleted |
 | Docker | Stopped containers, dangling images, unused build cache | `docker … prune` |
-| Downloads > N days | `~/Downloads` (N is 30 by default; change it in Settings) | **Moved to Trash** |
+| Downloads older than N days | `~/Downloads` (N is 30 by default; change it in Settings) | **Moved to Trash** |
 
-Only the *direct children* of those folders are removed; the folders themselves stay.
-
-Sizes are allocated disk space, which is what you actually get back. Docker figures are estimates reported by the Docker CLI.
+Only the *direct children* of those folders are removed; the folders themselves stay. Sizes are allocated disk space, which is what you actually get back. Docker figures are estimates reported by the Docker CLI.
 
 ## Safety
 
-- **Scan is read-only.** `ScanManager` only lists folders and reads file attributes.
-- **Two-step removal.** `CleanupManager` is only started from the dialog's Delete button.
-- **`SafetyPolicy` is checked twice**, at scan time and again immediately before each item is removed. It refuses anything that isn't a direct child of the category's folder, anything inside Desktop, Documents, Pictures, Movies, Music, iCloud Drive, Mail, Messages, Keychains or Application Support, any Photos/Music/TV/Final Cut library, and system locations.
-- **Symlinks are never followed**, so a link inside a cache can't lead the cleanup into your documents.
-- **Stale items are skipped.** Downloads and temp files are re-checked right before removal; anything modified since the scan is left alone.
-- **Your own files go to the Trash**, so a mistake can be undone.
-- **Docker volumes are never pruned.**
-- Failures are reported per item and never abort the whole run.
+| Guarantee | How |
+|---|---|
+| **Scan is read-only** | `ScanManager` only lists folders and reads file attributes. |
+| **Two-step removal** | `CleanupManager` starts only from the confirmation dialog's **Delete** button. |
+| **Policy checked twice** | `SafetyPolicy` runs at scan time and again right before each item is removed. It refuses anything that isn't a direct child of the category's folder, anything inside Desktop, Documents, Pictures, Movies, Music, iCloud Drive, Mail, Messages, Keychains or Application Support, any Photos/Music/TV/Final Cut library, and system locations. |
+| **Symlinks are never followed** | A link inside a cache can't lead the cleanup into your documents. |
+| **Stale items are skipped** | Downloads and temp files are re-checked right before removal; anything modified since the scan is left alone. |
+| **Reversible for your files** | Downloads and Xcode Archives are moved to the Trash. |
+| **Docker volumes are never pruned** | Only containers, dangling images and build cache are considered. |
+| **Failures don't abort the run** | Problems are reported per item. |
 
 ### Permissions and sandboxing
 
@@ -106,6 +144,8 @@ MacCleanupTests/CleanupEngineTests.swift
 ```
 
 ## Contributing
+
+Issues and pull requests are welcome. Before opening a pull request, run the test suite (see [Build from source](#build-from-source)); CI runs the same build and tests on every push and pull request.
 
 ### Adding a category
 

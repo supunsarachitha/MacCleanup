@@ -20,6 +20,10 @@ A native SwiftUI utility for macOS that scans well-known cleanup locations, show
 
 </div>
 
+<br>
+
+<img src="docs/assets/screenshots/overview-results.png" alt="Mac Cleanup Assistant showing the potential cleanup per category with a total recoverable size" width="860">
+
 ---
 
 ## Highlights
@@ -30,6 +34,21 @@ A native SwiftUI utility for macOS that scans well-known cleanup locations, show
 - **Safety policy, checked twice.** Protected folders and system locations are refused at scan time and again immediately before each removal.
 - **Your own files go to the Trash.** Downloads and Xcode Archives are moved to the Trash, so a mistake can be undone.
 - **Native and private.** Pure SwiftUI, no third-party dependencies, no network access.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/assets/screenshots/overview-idle.png" alt="Start screen with the Scan System button and the Downloads age setting"></td>
+    <td width="50%"><img src="docs/assets/screenshots/review-details.png" alt="Review Details listing every category with its size and a checkbox"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Scan</b>: read-only, nothing changes</sub></td>
+    <td align="center"><sub><b>Review</b>: expand any category, choose what to clean</sub></td>
+  </tr>
+</table>
+
+<sub>Screenshots show a scan of a developer Mac; your sizes and categories will differ.</sub>
 
 ## Install
 

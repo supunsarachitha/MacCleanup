@@ -1,10 +1,10 @@
 # Mac Cleanup Assistant
 
-A small, native macOS app that finds clutter, shows exactly what it would remove and how much space that frees, and only deletes after you confirm.
+[Project site](https://supunsarachitha.github.io/MacCleanup/) · SwiftUI · macOS 14 Sonoma or newer · No third-party dependencies · No network access
 
-SwiftUI · MVVM · macOS 14 (Sonoma) or newer · no third-party dependencies · no network access
+A native macOS utility for finding removable clutter, reviewing exactly what would be cleaned, and confirming before anything is removed.
 
-## Build and run
+## Build and test
 
 Requirements: macOS 14+ and Xcode 16 or newer.
 
@@ -44,7 +44,7 @@ Scan → Review → Select → Confirm → Delete → Results
 5. **Clean Selected** opens a confirmation dialog showing the size, category count and file count. Nothing is removed until **Delete** is pressed.
 6. Cleanup runs with live progress and a Stop button, then the **results** screen reports space recovered, files removed and time taken.
 
-## What it looks at
+## Cleanup categories
 
 | Category | Location | How it's cleaned |
 |---|---|---|
@@ -105,6 +105,8 @@ MacCleanup/
 MacCleanupTests/CleanupEngineTests.swift
 ```
 
+## Contributing
+
 ### Adding a category
 
 1. Add a case to `FileCategory.ID`.
@@ -117,4 +119,3 @@ The scan, cleanup, safety checks, summary and review screens pick it up with no 
 - Homebrew uses `~/Library/Caches/Homebrew`; a custom `HOMEBREW_CACHE` isn't detected.
 - Only the current user's Trash is emptied, not per-volume trashes.
 - Docker Desktop may not shrink its disk image immediately after a prune.
-- The app has no custom icon yet (`Assets.xcassets/AppIcon.appiconset` is ready for one).
